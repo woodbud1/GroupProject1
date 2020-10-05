@@ -1,0 +1,5 @@
+If you want to edit the styling for the website
+1. Go to terminal in VS Code
+2. type in this command
+sass --watch styling/style.scss:style.css
+3. Do your edits in style.scss and it will automatically apply it to the main style
