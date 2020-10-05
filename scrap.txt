@@ -1,7 +1,0 @@
-//Example string.
-$string = "John";
- 
-//Get the first character.
-$firstCharacter = $string[0];
-
-$userName = $firstCharacter.$lastName;
