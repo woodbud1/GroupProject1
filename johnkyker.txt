@@ -1,0 +1,7 @@
+//Example string.
+$string = "John";
+$lastName = "Kyker";
+//Get the first character.
+$firstCharacter = $string[0];
+
+$userName = $firstCharacter.$lastName;
