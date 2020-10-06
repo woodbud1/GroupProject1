@@ -7,11 +7,11 @@ if (isset($_SESSION["view_user"])) :
     $view_user = $_SESSION["view_user"];
     $profile = $view_user;
 endif;
-if (isset(($_SESSION["user_name"]))) :
+//if (isset(($_SESSION["user_name"]))) :
     $commenterProfile = $_SESSION["user_name"];
-else :
+//else :
     $view_user = '';
-endif;
+//endif;
 ?>
 <div class="card mb-4">
     <div class="card-body">
