@@ -1,11 +1,11 @@
 <?php
 $the_title = "MathWiz | About";
 $pathcor = "../";
-' if (!defined('directAccess')) :
+//' if (!defined('directAccess')) :
     echo 'Direct access not permitted';
     header("Location: ../user_manager/?action=about_index");
     die();
-endif; '
+//endif; '
 require_once '../view/header.php';
 if(isset($user_name)) :
 $_SESSION["user_name"] = $user_name;
