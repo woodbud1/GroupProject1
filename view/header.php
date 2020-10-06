@@ -7,10 +7,11 @@
     <meta name="keywords" content="HTML, CSS, PHP">
     <meta name="description" content="Group project website for Math.">
     <meta name="author" content="John Kyker">
-    <link rel="stylesheet" href="<?php echo $pathcor; ?>style.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-beta/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.4.1/css/mdb.min.css">
+    <link rel="stylesheet" href="<?php echo $pathcor; ?>styling/style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <link rel="icon" href="<?php echo $pathcor; ?>images/bIcon.png">
     <title><?php echo $the_title; ?></title>
 </head>
@@ -33,31 +34,30 @@
     ?>
     <!-- Navbar -->
     <div class="jumbotron text-center">
-        <h1>SCC Social Media!</h1>
+        <div class="topnav">
         <nav>
-            <ul class="navstyle">
          <?php
                     if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] !== "!") {
-                        //if user is logged in display the following
-                        echo'<li class="nav-item active"><a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=profile">Profile</a></li>';
-                        echo'<li class="nav-item active"><a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">Test</a></li>';
-                        echo'<li class="nav-item active"><a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">Drill</a></li>';
-                        echo'<li class="nav-item active"><a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">About</a></li>';
-                        echo ' <li class="nav-item active"><a href="?action=logoff">Logoff</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=home_index">Home</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=profile">Profile</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">Test</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">Drill</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">About</a></li>';
+                        echo'<a href="?action=logoff">Logoff</a></li>';
 
                     }else{
                         // if user is logged off display the following
-                    echo'<li class="nav-item active"><a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=home_index">Home</a></li>';
-                    echo'<li class="nav-item active"><a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=about_index">About</a></li>';
-                    echo '<li class="nav-item active"><a href="';
+                    echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=home_index">Home</a></li>';
+                    echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=about_index">About</a></li>';
+                    echo '<a href="';
                     echo htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, 'UTF-8');
                     echo 'user_manager/?action=login_initial">Login</a></li>';
-                    echo '<li class="nav-item active"><a href="';
+                    echo '<a href="';
                     echo $pathcor;
                     echo 'user_manager?action=registration">Registration</a></li>';
                     }
             ?>                
-            </ul>
         </nav>
+                </div>
     </div>
     <main role="main">

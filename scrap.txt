@@ -1,0 +1,26 @@
+//Example string.
+$string = "John";
+ 
+//Get the first character.
+$firstCharacter = $string[0];
+
+$userName = $firstCharacter.$lastName;
+
+nav {
+  position: relative;
+  padding: 10px;
+  align-content: stretch;
+  width: 100%;
+}
+
+nav ul{
+  padding-left: 1em;
+  background-color: #8AE1FC;
+  list-style-type: none;
+  overflow: hidden;
+  display: flex;
+  
+  width: 100%;
+}
+
+        <img src="<?php echo $pathcor; ?>images/2019335569.png" alt="MathWiz Logo">

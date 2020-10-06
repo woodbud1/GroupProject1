@@ -6,12 +6,13 @@ if (!isset($error_message)) {
     $error_message = '';
 }
 ?>
-
+<div class=
 <h1>Registration</h1>
-<h2>Please fill out each box below to create your account.</h2>
-<p>
+<h3>
+Be excited and sign up below.</h3>
+</h3>
     Password guidelines: Password must have the following, an upper case letter, lower case letter, a digit and a special character.
-    Password must be at least 12 characters long.</p>
+    Password must be at least 10 characters long.</p>
 <form action="." method="post">
     <input type="hidden" name="action" value="add_user">
     <span class="error"><?php echo htmlspecialchars($error_message, ENT_QUOTES | ENT_HTML5, 'UTF-8') ?></span><br><br>

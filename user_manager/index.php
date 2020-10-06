@@ -1,7 +1,7 @@
 <?php
-require('../model/database.php');
+/* require('../model/database.php');
 require('../model/user.php');
-require('../model/user_db.php');
+require('../model/user_db.php'); */
 session_start();
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {

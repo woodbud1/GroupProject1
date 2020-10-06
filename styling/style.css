@@ -6,33 +6,45 @@
 body {
   margin: 0;
   padding: 0;
-  
+  background-color: #8AE1FC;
+}
+.jumbotron{
+  background-image: url(../images/header_banner.jpg);
+  color: white;
+}
+.jumbotron a{
+  color: white;
+  text-decoration: none;
+}
+/* Add a black background color to the top navigation */
+.topnav {
+  background-color: #0C6177;
+  overflow: hidden;
 }
 
-nav {
-  position: relative;
-  padding: 10px;
-  border: 30px solid;
-  background: #00206c;
-  opacity: 0.9;
-  height: auto;
+/* Style the links inside the navigation bar */
+.topnav a {
+  float: left;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 14px;
+  text-decoration: none;
+  font-size: 1.2rem;
+
 }
 
-.navstyle {
-  border-top-left-radius: 50% 20%;
-  border-top-right-radius: 50% 20%;
-  border-bottom-left-radius: 50% 20%;
-  border-bottom-right-radius: 50% 20%;
+/* Change the color of links on hover */
+.topnav a:hover {
+  background-color: #ddd;
+  color: black;
 }
 
-#nav ul a {
-  display: block;
-  color: #a59378;
-  text-shadow: 0 2px 0 #000;
-  width: 100%;
-  height: calc(100% - 15px);
-  padding-top: 15px;
+/* Add a color to the active/current link */
+.topnav a.active {
+  background-color: #4CAF50;
+  color: white;
 }
+
 footer {
   padding-top: 1.5em;
 }
