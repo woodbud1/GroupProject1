@@ -30,7 +30,7 @@ class database {
                 self::$db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             } catch (PDOException $ex) {
                 $errorMessage = $ex->getMessage();
-                include('../database_error.php');
+                include('../errors/database_error.php');
                 
                 exit();
             }

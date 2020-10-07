@@ -2,9 +2,9 @@
 $the_title = "MathWiz | About";
 $pathcor = "../";
 //' if (!defined('directAccess')) :
-    echo 'Direct access not permitted';
-    header("Location: ../user_manager/?action=about_index");
-    die();
+//    echo 'Direct access not permitted';
+//    header("Location: ../user_manager/?action=about_index");
+//    die();
 //endif; '
 require_once '../view/header.php';
 if(isset($user_name)) :
