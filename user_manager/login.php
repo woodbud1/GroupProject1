@@ -1,9 +1,9 @@
 <?php
 
 $the_title = "MathWiz | Login";
-$pathcor = "../";
-require_once '../view/header.php'; 
-require_once '../util/secure_conn.php';
+$pathcor = "./";
+require './view/header.php'; 
+require_once './util/secure_conn.php';
 ?>
 
 
@@ -25,4 +25,4 @@ require_once '../util/secure_conn.php';
             </form>
        
         </div>
-   <?php require_once '../view/footer.php'; ?> 
+   <?php require_once './view/footer.php'; ?> 

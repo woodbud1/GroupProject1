@@ -40,7 +40,7 @@ class UserDB {
    
     public static function authenticationUser($userEntry) {
         $db = Database::getDB();
-        $query = 'SELECT password FROM users WHERE userName = :entry';
+        $query = 'SELECT password FROM user WHERE userName = :entry';
         $statement = $db->prepare($query);
         $statement->bindValue(':entry', $userEntry);
         $statement->execute();
