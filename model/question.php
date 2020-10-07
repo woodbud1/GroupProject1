@@ -1,7 +1,7 @@
 <?php
 
 
-class questions {
+class Question {
     
     private $id, $question, $answer;
 
