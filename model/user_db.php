@@ -51,7 +51,7 @@ class UserDB {
 
     public static function authenticationUsername($userEntry) {
         $db = Database::getDB();
-        $query = 'SELECT userName FROM users WHERE userName = :entry';
+        $query = 'SELECT userName FROM user WHERE userName = :entry';
         $statement = $db->prepare($query);
         $statement->bindValue(':entry', $userEntry);
         $statement->execute();

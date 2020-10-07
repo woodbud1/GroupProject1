@@ -9,7 +9,7 @@ $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action === NULL) {
-        $action = 'login';
+        $action = 'login_initial';
     }
 }
 switch ($action) {
@@ -147,14 +147,14 @@ switch ($action) {
             $password = $hash;
             // $i = new User($first_name, $last_name, $email, $user_name, $password);
             // UserDB::addUser($i);
-            include('confirmation.php');
+            include('./confirmation.php');
         } else {
-            include('registration.php');
+            include('./registration.php');
         }
         break;
     case 'login_initial':
         $loginerror_message = "";
-        include('login.php');
+        include('./user_manager/login.php');
         break;
     case 'login':
         $isValid = true;
