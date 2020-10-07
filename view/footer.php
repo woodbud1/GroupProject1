@@ -2,7 +2,7 @@
 <div class="footer text-center py-3">
     <footer>
     <p>
-    © 2020 Capstone <img src="../images/footer.png" alt="our logo" width="170" height="86">
+    © 2020 Capstone <img src="./images/footer.png" alt="our logo" width="170" height="86">
     </p>
     </footer>
 </div>
