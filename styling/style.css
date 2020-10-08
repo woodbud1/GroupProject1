@@ -178,3 +178,14 @@ footer {
 #passinfo{
   display: none;
 }
+
+.about_para1{
+  align-content: left;
+}
+.about_para2{
+
+  align-content: right;
+}
+.about_para3{
+  align-content: left;
+}

@@ -503,6 +503,9 @@ case "viewdelete":
 
         include('../about/index.php');
         break;
+    case 'drill':
+        include('drill.php');
+    break;
     default:
         $error = "Definitely, not suppose to be redirected here.";
         include('../errors/error.php');
