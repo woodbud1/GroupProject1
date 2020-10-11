@@ -1,7 +1,8 @@
 <?php
-/* require('../model/database.php');
-require('../model/user.php');
-require('../model/user_db.php'); */
+require_once ('../model/user_db.php');
+require_once ('../model/database.php');
+require_once ('../model/user.php');
+
 session_start();
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
@@ -84,7 +85,7 @@ switch ($action) {
                 // Go up a single digit every time there is a duplicate number
                 $dupCounter++;
                 $userDupTest = $userTest.$dupCounter;
-                $userResult = UserDB::duplicateUser($userDupTest);
+                $userResult = user_db::duplicateUser($userDupTest);
             } 
             $userTest = $userDupTest;
         }
@@ -143,8 +144,8 @@ switch ($action) {
             // Hash it for the server and pass it back to the password
             $hash = password_hash($password, PASSWORD_BCRYPT);
             $password = $hash;
-            // $i = new User($first_name, $last_name, $email, $user_name, $password);
-            // UserDB::addUser($i);
+            $i = new User($first_name, $last_name, $user_name, $password);
+            UserDB::addUser($i);
             include('confirmation.php');
         } else {
             include('registration.php');
@@ -191,7 +192,7 @@ switch ($action) {
         $_SESSION = array();
         session_destroy();
         $loginerror_message = "";
-        include('login.php');
+        include('logout.php');
         break;
     case 'profile':
         $user_message = '';
@@ -483,7 +484,7 @@ case "viewdelete":
         define('directAccess', TRUE);
         if (isset($_SESSION["user_name"])) :
             $profile = $_SESSION["user_name"];
-            $comments = Commentdb::getbyprofile($profile);
+ //          $comments = Commentdb::getbyprofile($profile);
         elseif (isset($user_name) === false) :
             $user_name = null;
         endif;

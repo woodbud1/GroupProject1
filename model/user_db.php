@@ -4,7 +4,7 @@ class UserDB {
     public static function getUsers() {
       $db = Database::getDB();
 
-      $query = 'SELECT * FROM users
+      $query = 'SELECT * FROM user
                 ORDER BY lastName';
       $statement = $db->prepare($query);
       $statement->execute();
@@ -25,10 +25,10 @@ class UserDB {
   public static function addUser($i) {
     $db = Database::getDB();
     
-    $query = 'INSERT INTO users
-                 (firstName, lastName, userName, email, password)
+    $query = 'INSERT INTO user
+                 (FName, LName, UserName, Password)
               VALUES
-                 (:first_name, :last_name, :user_name, :email, :password)';
+                 (:first_name, :last_name, :user_name, :password)';
     $statement = $db->prepare($query);
     $statement->bindValue(':first_name', $i->getFirstName());
     $statement->bindValue(':last_name', $i->getLastName());
@@ -40,7 +40,7 @@ class UserDB {
    
     public static function authenticationUser($userEntry) {
         $db = Database::getDB();
-        $query = 'SELECT password FROM user WHERE userName = :entry';
+        $query = 'SELECT Password FROM user WHERE UserName = :entry';
         $statement = $db->prepare($query);
         $statement->bindValue(':entry', $userEntry);
         $statement->execute();
@@ -86,8 +86,8 @@ class UserDB {
 
     public static function duplicateUser($userTest) {
         $db = Database::getDB();
-        $query = 'SELECT userName FROM users
-                  WHERE userName = :userTest'; 
+        $query = 'SELECT UserName FROM user
+                  WHERE UserName = :userTest'; 
         $statement = $db->prepare($query);
         $statement->bindValue(':userTest', $userTest);
         $statement->execute();
@@ -113,7 +113,7 @@ class UserDB {
     public static function fetchUserID($entry) {
         $db = Database::getDB();
 
-        $query = 'SELECT userID FROM users
+        $query = 'SELECT ID FROM user
                   WHERE userName = :entry';
         $statement = $db->prepare($query);
         $statement->bindValue(':entry', $entry);
@@ -126,8 +126,8 @@ class UserDB {
     public static function fetchImage($user_id) {
         $db = Database::getDB();
 
-        $query = 'SELECT image FROM users
-                  WHERE userID = :user_id';
+        $query = 'SELECT * FROM user
+                  WHERE ID = :user_id';
         $statement = $db->prepare($query);
         $statement->bindValue(':user_id', $user_id);
         $statement->execute();

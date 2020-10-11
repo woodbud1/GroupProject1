@@ -1,8 +1,8 @@
 <?php
 
-require_once('./model/user_db.php');
-require_once('./model/database.php');
-require_once('./model/user.php');
+require ('./model/user_db.php');
+require ('./model/database.php');
+require ('./model/user.php');
 
 session_start();
 $action = filter_input(INPUT_POST, 'action');
@@ -76,7 +76,7 @@ switch ($action) {
         }
 
         // Test for duplicate username
-        $userResult = UserDB::duplicateUser($userTest);
+        $userResult = user_db::duplicateUser($userTest);
         if($userResult > 0){
 
         } else{
@@ -86,7 +86,7 @@ switch ($action) {
                 // Go up a single digit every time there is a duplicate number
                 $dupCounter++;
                 $userDupTest = $userTest.$dupCounter;
-                $userResult = UserDB::duplicateUser($userDupTest);
+                $userResult = user_db::duplicateUser($userDupTest);
             } 
             $userTest = $userDupTest;
         }
@@ -164,9 +164,9 @@ switch ($action) {
         $password_entry = filter_input(INPUT_POST, 'password_entry');
         $hashed_password = UserDB::authenticationUser($user_entry);
         if (isset($hashed_password[0])) {
-            $hash = $hashed_password[0];
+           $hash = $hashed_password[0];
             trim($hash);
-        }
+      }
 
 
         if (password_verify($password_entry, $hash)) {
@@ -217,7 +217,7 @@ switch ($action) {
         } else {
             $user_display = $_SESSION["user_name"];
             $userID = UserDB::fetchUserID($user_display);
-            $user_image = UserDB::fetchImage($userID[0]);
+            //$user_image = UserDB::fetchImage($userID[0]);
             include('userprofile.php');
         }
         break;
@@ -261,7 +261,7 @@ switch ($action) {
         $email_message = '';
         $user_display = $_SESSION["user_name"];
         $userID = UserDB::fetchUserID($user_display);
-        $user_image = UserDB::fetchImage($userID[0]);
+        //$user_image = UserDB::fetchImage($userID[0]);
         include('userprofile.php');
         break;
     // case 'changeEmail':
@@ -321,7 +321,7 @@ switch ($action) {
                 move_uploaded_file($file_tmp, "$uploads_dir/$file_name");
                 $userID = UserDB::fetchUserID($user_display);
                 UserDB::uploadImage($userID[0], $upload_name);
-                $user_image = UserDB::fetchImage($userID[0]);
+             //   $user_image = UserDB::fetchImage($userID[0]);
                 $user_message = "Success!";
                 include('userprofile.php');
             } else {
@@ -482,10 +482,10 @@ case "viewdelete":
         break;
 */
     case 'home_index':        
-        define('directAccess', TRUE);
+     //   define('directAccess', TRUE);
         if (isset($_SESSION["user_name"])) :
             $profile = $_SESSION["user_name"];
-            $comments = Commentdb::getbyprofile($profile);
+       //     $comments = Commentdb::getbyprofile($profile);
         elseif (isset($user_name) === false) :
             $user_name = null;
         endif;

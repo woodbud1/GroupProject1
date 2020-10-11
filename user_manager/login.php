@@ -21,7 +21,7 @@ require_once './util/secure_conn.php';
                 <i class="fas fa-key fa-2x"></i>
                 <input type="password" placeholder="Password" name="password_entry" value="">
                 <input type="submit" name="submit" value="Sign in!"><br>
-                <p>Not a member? <a href="registration.php">Sign Up Here!</a></p>
+                <p>Not a member? <a href="./user_manager/registration.php">Sign Up Here!</a></p>
             </form>
        
         </div>
