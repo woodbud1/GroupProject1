@@ -1,5 +1,5 @@
 <?php
-$the_title = "MathWiz | About";
+$the_title = "MathWiz | Drill";
 $pathcor = "../";
 //' if (!defined('directAccess')) :
 //    echo 'Direct access not permitted';

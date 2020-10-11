@@ -55,6 +55,7 @@
                     echo '<a href="';
                     echo $pathcor;
                     echo 'user_manager?action=registration">Registration</a></li>';
+                    echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=drill">Drill</a></li>';
                     }
             ?>                
         </nav>
