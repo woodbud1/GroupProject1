@@ -250,7 +250,9 @@ switch ($action) {
 
         if ($isValid == true) {
             $password = $passTest;
-            $hash = password_hash($password, PASSWORD_BCRYPT);
+            // If we absolutely insist on not being secure. 
+            // Hash values are encrypted to 59/60 bytes so changing to BINARY(60) for password is easier. 
+            // $hash = password_hash($password, PASSWORD_BCRYPT);
             $user = $_SESSION["user_name"];
             UserDB::changePassword($hash, $user);
             $pass_message = "Password successfully updated";
