@@ -1,19 +1,10 @@
 <?php
-$the_title = "MathWiz | Drill";
-$pathcor = "../";
-//' if (!defined('directAccess')) :
-//    echo 'Direct access not permitted';
-//    header("Location: ../user_manager/?action=about_index");
-//    die();
-//endif; '
-require_once '../view/header.php';
-if(isset($user_name)) :
-$_SESSION["user_name"] = $user_name;
-endif;
+require 'functions.php';
 $newFdigit = randdigit();
 $newSdigit = randdigit();
 $newOperator = randop();
 ?>
+
 
 <h1>Math Quiz</h1> <br /> <br />
 <?php 
@@ -41,5 +32,4 @@ $newOperator = randop();
     <input type="hidden" name="score" value="<?php echo $score; ?>" />
     <input type="hidden" name="count" value="<?php echo $count; ?>" /></p>
 </form>
- 
-<?php require_once '../view/footer.php'; ?>
+
