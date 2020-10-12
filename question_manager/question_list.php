@@ -1,4 +1,9 @@
-<?php include '../view/header.php'; ?>
+
+<?php
+
+$the_title = "MathWiz | Database Error";
+$pathcor = "../";
+require_once '../view/header.php'; ?>
 <main>
     <h2>Question List</h2>
     <table>
