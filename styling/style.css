@@ -189,3 +189,24 @@ footer {
 .about_para3{
   align-content: left;
 }
+.question_add input[type=number] {
+  width: 90px;
+  padding: 12px 12px;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.question_add input[type=submit]:hover {
+  background-color: #48B8D0;
+}
+.question_add{
+  text-align: center;
+}
+.question_add_char {
+  color: #0C6177;
+  padding: 5px 5px;
+  font-size: 2rem;
+
+}
+

@@ -1,7 +1,7 @@
 <?php
-/* require('../model/database.php');
-require('../model/user.php');
-require('../model/user_db.php'); */
+require('../model/database.php');
+require('../model/question.php');
+require('../model/question_db.php');
 session_start();
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
@@ -11,7 +11,8 @@ if ($action === NULL) {
     }
 }
 switch ($action) {
-    case 'list_questions':
+    case 'list_questions':                       //Go to Display All Questions View
+        $questions = questions_db::getAllQuestions();
         include('question_list.php');
         break;
     case 'show_add_form':

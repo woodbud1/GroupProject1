@@ -5,28 +5,26 @@ $pathcor = "../";
 require_once '../view/header.php';
 ?>
 <main>
-    <h1>Add Question</h1>
     <div class="question_add">
-    <form action="index.php" method="post" id="add_question_form">
-        <input type="hidden" name="action" value="add_question" />
+        <h1>Add Question</h1>
 
-        <label>Question:</label>
-        <p>Addend 1:
-        <input type="text" name="addendOne">
-        <strong>+</strong>
-        Addend 2:
-        <input type="text" name="addendOne">
-        </p>
+        <form action="index.php" method="post" id="add_question_form">
+            <input type="hidden" name="action" value="add_question" />
 
-        <label>Answer:</label>
-        <input type="text" name="name">
-        <br>
+            <label>Question:</label>
+            <p>
+                <input type="number" name="addendOne">
+                <span class="question_add_char">+</span>
+                <input type="number" name="addendOne">
+                <span class="question_add_char">=</span>
+                <input type="number" name="answer">
+            </p>
 
-        <label>&nbsp;</label>
-        <input type="submit" value="Add Product">
-        <br>
-    </form>
-    <p><a href="index.php?action=list_products">View Question List</a></p>
+            <label>&nbsp;</label>
+            <input type="submit" value="Add Question">
+            <br>
+        </form>
+        <p><a href="index.php?action=list_questions">View Question List</a></p>
     </div>
 </main>
 <?php include '../view/footer.php'; ?>
