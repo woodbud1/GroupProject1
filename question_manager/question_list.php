@@ -14,10 +14,8 @@ require_once '../view/header.php'; ?>
         </tr>
         <?php foreach ($questions as $question) : ?>
             <tr>
-                <td><?php echo $question->getAddendOne(); ?></td>
-                <td><?php echo $question->getName(); ?></td>
-                <td class="right"><?php echo $product->getPriceFormatted(); ?>
-                </td>
+                <td><?php echo $question->getAddendOne() . "+" . $question->getAddendTwo(); ?></td>
+                <td><?php echo $question->getAnswer(); ?></td>
                 <td><form action="." method="post"
                           id="delete_question_form">
                         <input type="hidden" name="action"
