@@ -3,10 +3,11 @@
 
 class Question {
     
-    private $id, $question, $answer;
+    private $id, $addendOne, $addendTwo, $answer;
 
-    public function __construct($question, $answer) {
-        $this->question = $question;
+    public function __construct($addendOne, $addendTwo, $answer) {
+        $this->addendOne = $addendOne;
+        $this->addendTwo = $addendTwo;
         $this->answer = $answer;
     }
     
@@ -17,11 +18,18 @@ class Question {
         $this->id = $value;
     }
 
-    public function getQuestion() {
-        return $this->question;
+    public function getAddendOne() {
+        return $this->addendOne;
     }
-    public function setQuestion($value) {
-        $this->question = $value;
+    public function setAddendOne($value) {
+        $this->addendOne = $value;
+    }
+    
+    public function getAddendTwo() {
+        return $this->addendTwo;
+    }
+    public function setAddendTwo($value) {
+        $this->addendTwo = $value;
     }
 
     public function getAnswer() {
