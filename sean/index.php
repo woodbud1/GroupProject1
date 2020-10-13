@@ -5,7 +5,6 @@ $number1 = rand(0, 9);
 $number2 = rand(0, 9);
 $message = 'Enter some numbers and click on the Submit button.';
 $operand = filter_input(INPUT_POST, 'operator');
-echo htmlspecialchars($operand);
 $answer = 0;
 
 //process
@@ -15,8 +14,7 @@ switch ($action) {
     case 'process_data':
         $number1 = filter_input(INPUT_POST, 'number1');
         $number2 = filter_input(INPUT_POST, 'number2');
-        $number3 = filter_input(INPUT_POST, 'number3');
-
+        
         if (ctype_digit(ltrim((string) $number1, '-'))) {
 
             if ($operand == "add") {
@@ -40,7 +38,6 @@ switch ($action) {
                     $message = "The answer is: " . $answer;
                 }
             }
-
             break;
         } else {
             $message = 'You must enter all numbers as integers.';
