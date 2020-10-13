@@ -1,5 +1,0 @@
-$score = 0;
-$count = 0;
-$newFdigit = randdigit();
-$newSdigit = randdigit();
-$newOperator = randop();
