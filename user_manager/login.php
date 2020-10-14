@@ -1,8 +1,8 @@
 <?php
 
 $the_title = "MathWiz | Login";
-$pathcor = "../";
-require_once '../view/header.php';
+$pathcor = "./";
+require_once './view/header.php';
 ?>
 
 
@@ -24,4 +24,4 @@ require_once '../view/header.php';
             </form>
        
         </div>
-        <?php include '../view/footer.php'; ?>
+        <?php include './view/footer.php'; ?>

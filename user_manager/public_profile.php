@@ -1,8 +1,8 @@
 <?php
 $the_title = "Profile comments";
-$pathcor = "../";
+$pathcor = ".";
 $showloginbar = 1;
-require_once '../view/header.php';
+require_once './view/header.php';
 ?>
 
 <body>

@@ -1,20 +1,19 @@
 <?php
-
-require ('./model/user_db.php');
-require ('./model/database.php');
-require ('./model/user.php');
-
+require_once ('./model/user_db.php');
+require_once ('./model/database.php');
+require_once ('./model/user.php');
 session_start();
+// $pathcor = "./"
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
     if ($action === NULL) {
-        $action = 'login_initial';
+        $action = 'registration';
     }
 }
 switch ($action) {
     case 'registration':
-        include('registration.php');
+        include('./user_manager/registration.php');
         break;
     case 'add_user':
         // Fetch the data from the registration attempt
@@ -76,64 +75,25 @@ switch ($action) {
         }
 
         // Test for duplicate username
-        $userResult = user_db::duplicateUser($userTest);
+        $userResult = UserDB::duplicateUser($userTest);
         if($userResult > 0){
-
-        } else{
             // Have a test string to increment against
             $userDupTest = $userTest;
             while ($userResult > 0) {
                 // Go up a single digit every time there is a duplicate number
                 $dupCounter++;
                 $userDupTest = $userTest.$dupCounter;
-                $userResult = user_db::duplicateUser($userDupTest);
+                $userResult = UserDB::duplicateUser($userDupTest);
             } 
             $userTest = $userDupTest;
+        } else{
+            
         }
 
         if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] != "!") {
             $error_message = "You are already logged in. You cannot be logged in while creating a new account.";
             $isValid = false;
         }
-
-        /* 
-        // Looking into recaptcha v3 but you have to register an online domain to get it to function. Still cool to learn from Google Dev Tools.
-        // Checks if form has been submitted
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            function post_captcha($user_response) {
-            $fields_string = '';
-            $fields = array(
-            'secret' => '6Le2Q-0UAAAAABRsVE94ifbJge50qp2Ss91lyzgm',
-            'response' => $user_response
-            );
-            foreach($fields as $key=>$value)
-            $fields_string .= $key . '=' . $value . '&';
-            $fields_string = rtrim($fields_string, '&');
-
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
-            curl_setopt($ch, CURLOPT_POST, count($fields));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
-
-            $result = curl_exec($ch);
-            curl_close($ch);
-
-            return json_decode($result, true);
-        }
-
-         // Call the function post_captcha
-        $res = post_captcha($_POST['g-recaptcha-response']);
-
-        if (!$res['success']) {
-        // What happens when the CAPTCHA wasn't checked
-        $error_message = 'Please go back and make sure you check the security CAPTCHA box.';
-        $isValid = false;
-        } else {
-        // If CAPTCHA is successfully completed...
-        $isValid = true;
-             }
-        } */
 
         // if its valid then insert data into the SQL Database
         if ($isValid == true) {
@@ -143,13 +103,13 @@ switch ($action) {
             // Create the Session to validate the user is logged in and track name
             $_SESSION["user_name"] = $user_name;
             // Hash it for the server and pass it back to the password
-            $hash = password_hash($password, PASSWORD_BCRYPT);
-            $password = $hash;
-            // $i = new User($first_name, $last_name, $email, $user_name, $password);
-            // UserDB::addUser($i);
-            include('./confirmation.php');
+            // $hash = password_hash($password, PASSWORD_BCRYPT);
+            // $password = $hash;
+            $i = new User($first_name, $last_name, $user_name, $password);
+            UserDB::addUser($i);
+            include('./user_manager/confirmation.php');
         } else {
-            include('./registration.php');
+            include('./user_manager/registration.php');
         }
         break;
     case 'login_initial':
@@ -164,17 +124,22 @@ switch ($action) {
         $password_entry = filter_input(INPUT_POST, 'password_entry');
         $hashed_password = UserDB::authenticationUser($user_entry);
         if (isset($hashed_password[0])) {
-           $hash = $hashed_password[0];
+            $hash = $hashed_password[0];
             trim($hash);
-      }
+        }
 
-
-        if (password_verify($password_entry, $hash)) {
+        if ($password_entry === $hash) {
             $isValid = true;
         } else {
             $isValid = false;
             $loginerror_message = "Login Failed. Check username or password.";
         }
+        /* if (password_verify($password_entry, $hash)) {
+            $isValid = true;
+        } else {
+            $isValid = false;
+            $loginerror_message = "Login Failed. Check username or password.";
+        } */
 
         if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] !== "!") {
             $isValid = false;
@@ -193,7 +158,7 @@ switch ($action) {
         $_SESSION = array();
         session_destroy();
         $loginerror_message = "";
-        include('login.php');
+        include('./user_manager/logout.php');
         break;
     case 'profile':
         $user_message = '';
@@ -206,19 +171,14 @@ switch ($action) {
 
         $user = $_SESSION["user_name"];
 
-        if (is_null($user)) {
-            $error_message = "Not a member? Sign up here!";;
-            include('registration.php');
-        }
-
-        if ($user === "!") {
+        if ($user === "!" || is_null($user))  {
             $error_message = "Not a member? Sign up here!";
-            include('registration.php');
+            include('./user_manager/registration.php');
         } else {
             $user_display = $_SESSION["user_name"];
-            $userID = UserDB::fetchUserID($user_display);
-            //$user_image = UserDB::fetchImage($userID[0]);
-            include('userprofile.php');
+            // $userID = UserDB::fetchUserID($user_display);
+            $user_image = UserDB::fetchImage($user_display);
+            include('./user_manager/userprofile.php');
         }
         break;
     case 'changePassword':
@@ -251,9 +211,11 @@ switch ($action) {
 
         if ($isValid == true) {
             $password = $passTest;
-            $hash = password_hash($password, PASSWORD_BCRYPT);
+            // If we absolutely insist on not being secure. 
+            // Hash values are encrypted to 59/60 bytes so changing to BINARY(60) for password is easier. 
+            // $hash = password_hash($password, PASSWORD_BCRYPT);
             $user = $_SESSION["user_name"];
-            UserDB::changePassword($hash, $user);
+            UserDB::changePassword($password, $user);
             $pass_message = "Password successfully updated";
         }
 
@@ -261,8 +223,8 @@ switch ($action) {
         $email_message = '';
         $user_display = $_SESSION["user_name"];
         $userID = UserDB::fetchUserID($user_display);
-        //$user_image = UserDB::fetchImage($userID[0]);
-        include('userprofile.php');
+        $user_image = UserDB::fetchImage($userID[0]);
+        include('./user_manager/userprofile.php');
         break;
     // case 'changeEmail':
     //     $emailTest = filter_input(INPUT_POST, "newemail");
@@ -319,13 +281,13 @@ switch ($action) {
                 $file_name = $user_display . $file_name;
                 $upload_name = $uploads_dir . $file_name;
                 move_uploaded_file($file_tmp, "$uploads_dir/$file_name");
-                $userID = UserDB::fetchUserID($user_display);
-                UserDB::uploadImage($userID[0], $upload_name);
-             //   $user_image = UserDB::fetchImage($userID[0]);
+                // $userID = UserDB::fetchUserID($user_display);
+                UserDB::uploadImage($user_display, $upload_name);
+                $user_image = UserDB::fetchImage($user_display);
                 $user_message = "Success!";
-                include('userprofile.php');
+                include('./user_manager/userprofile.php');
             } else {
-                include('../errors/error.php');
+                include('./errors/error.php');
             }
         }
         break;
@@ -482,19 +444,8 @@ case "viewdelete":
         break;
 */
     case 'home_index':        
-     //   define('directAccess', TRUE);
-        if (isset($_SESSION["user_name"])) :
-            $profile = $_SESSION["user_name"];
-       //     $comments = Commentdb::getbyprofile($profile);
-        elseif (isset($user_name) === false) :
-            $user_name = null;
-        endif;
-        if (strpos($_SERVER['REQUEST_URI'], 'user_manager') !== false) :
-            $pathcor = "../";
-        endif;
-        include($pathcor . 'index.php');
+        include('main_page.php');
         break;
-
     case 'about_index':
         define('directAccess', TRUE);
         if (isset($user_name) === true) :
@@ -503,10 +454,51 @@ case "viewdelete":
             $user_name = null;
         endif;
 
-        include('../about/index.php');
+        include('./about/index.php');
         break;
+    case 'drill':
+        $drill_body = "Answer Questions below.";
+        $score = 0;
+        $count = 0;
+        $newFdigit = randdigit();
+        $newSdigit = randdigit();
+        $newOperator = randop();
+        include('./drill/index.php');
+    break;
+    case 'drill_reset':
+        $drill_body = "Drill Reset! Answer Questions below.";
+        $count = 0;
+        $score = 0;
+        include('./drill/index.php');
+    break;
+    case 'drill_answer':
+        $firstDigit = $_POST['lho'];
+        $secondDigit = $_POST['rho'];
+        $operator = $_POST['op'];
+        $userAnswer = $_POST['answer'];
+        $count = $_POST['count'];
+        $score = $_POST['score'];
+        $answer = evaluate($firstDigit, $secondDigit, $operator);
+        
+        if($answer == $userAnswer)
+        {
+            $count = $count + 1;
+            $score = $score + 1;
+            $drill_body = "Correct! $score out of $count";
+        }
+        else
+        {   
+            $count = $count + 1;
+            $drill_body = "Incorrect! $score out of $count";
+        }
+        include('./drill/index.php');
+    break;
+    case 'flashcard':
+        include('./flashcards/index.php');
+    break;
     default:
         $error = "Definitely, not suppose to be redirected here.";
-        include('../errors/error.php');
+        include('./errors/error.php');
         break;
 }
+

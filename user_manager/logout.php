@@ -1,7 +1,7 @@
 <?php 
 $the_title = "MathWiz | Logout";
-$pathcor = "../";
-include '../view/header.php'; ?>
+$pathcor = "./";
+include './view/header.php'; ?>
    <main>
        <div class="box">
         <div class="row">
@@ -16,5 +16,5 @@ include '../view/header.php'; ?>
      </form>
        </div>
    </main>
-<?php include '../view/footer.php'; ?>
+<?php include './view/footer.php'; ?>
 

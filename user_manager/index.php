@@ -2,8 +2,8 @@
 require_once ('../model/user_db.php');
 require_once ('../model/database.php');
 require_once ('../model/user.php');
-
 session_start();
+$pathcor = "./";
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
@@ -483,17 +483,7 @@ case "viewdelete":
         break;
 */
     case 'home_index':        
-        define('directAccess', TRUE);
-        if (isset($_SESSION["user_name"])) :
-            $profile = $_SESSION["user_name"];
- //          $comments = Commentdb::getbyprofile($profile);
-        elseif (isset($user_name) === false) :
-            $user_name = null;
-        endif;
-        if (strpos($_SERVER['REQUEST_URI'], 'user_manager') !== false) :
-            $pathcor = "../";
-        endif;
-        include($pathcor . 'index.php');
+        include('../main_page.php');
         break;
 
     case 'about_index':

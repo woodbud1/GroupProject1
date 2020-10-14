@@ -1,7 +1,7 @@
 <?php
 $the_title = "Confirmation";
-$pathcor = "../";
-require_once '../view/header.php';
+$pathcor = "./";
+require_once './view/header.php';
 ?>
     <body>
         <main>
@@ -13,5 +13,5 @@ require_once '../view/header.php';
             <p>Password: <?php echo htmlspecialchars($passTest, ENT_QUOTES | ENT_HTML5, 'UTF-8'); ?></p>
      </main>
     </body>
-<?php require_once '../view/footer.php'; ?> 
+<?php require_once './view/footer.php'; ?> 
 
