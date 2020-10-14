@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Oct 06, 2020 at 02:04 AM
--- Server version: 10.3.15-MariaDB
--- PHP Version: 7.3.6
+-- Generation Time: Oct 15, 2020 at 01:08 AM
+-- Server version: 10.4.14-MariaDB
+-- PHP Version: 7.4.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -19,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `mathwhiz`
+-- Database: `mathwiz`
 --
 
 -- --------------------------------------------------------
@@ -33,8 +32,19 @@ CREATE TABLE `user` (
   `UserName` varchar(20) COLLATE utf8_bin NOT NULL,
   `FName` varchar(20) COLLATE utf8_bin NOT NULL,
   `LName` varchar(20) COLLATE utf8_bin NOT NULL,
-  `Password` varchar(20) COLLATE utf8_bin NOT NULL
+  `Password` varchar(20) COLLATE utf8_bin NOT NULL,
+  `image` varchar(256) COLLATE utf8_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+
+--
+-- Dumping data for table `user`
+--
+
+INSERT INTO `user` (`ID`, `UserName`, `FName`, `LName`, `Password`, `image`) VALUES
+(2, 'James.Watrud', 'James', 'Watrud', 'Nebraska123!!', ''),
+(3, 'John.Kyker', 'John', 'Kyker', 'Nebraska123!!', ''),
+(5, 'James.Watrud1', 'James', 'Watrud', 'Nebraska123!!', ''),
+(6, 'James.Watrud2', 'James', 'Watrud', 'treswdawsrtoikplSDDd', '');
 
 --
 -- Indexes for dumped tables
@@ -54,7 +64,7 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

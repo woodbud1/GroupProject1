@@ -210,18 +210,13 @@ switch ($action) {
 
         $user = $_SESSION["user_name"];
 
-        if (is_null($user)) {
-            $error_message = "Not a member? Sign up here!";;
-            include('registration.php');
-        }
-
-        if ($user === "!") {
+        if ($user === "!" || is_null($user))  {
             $error_message = "Not a member? Sign up here!";
             include('registration.php');
         } else {
             $user_display = $_SESSION["user_name"];
-            $userID = UserDB::fetchUserID($user_display);
-            $user_image = UserDB::fetchImage($userID[0]);
+            // $userID = UserDB::fetchUserID($user_display);
+            $user_image = UserDB::fetchImage($user_display);
             include('userprofile.php');
         }
         break;
@@ -325,9 +320,9 @@ switch ($action) {
                 $file_name = $user_display . $file_name;
                 $upload_name = $uploads_dir . $file_name;
                 move_uploaded_file($file_tmp, "$uploads_dir/$file_name");
-                $userID = UserDB::fetchUserID($user_display);
-                UserDB::uploadImage($userID[0], $upload_name);
-                $user_image = UserDB::fetchImage($userID[0]);
+                // $userID = UserDB::fetchUserID($user_display);
+                UserDB::uploadImage($user_display, $upload_name);
+                $user_image = UserDB::fetchImage($user_display);
                 $user_message = "Success!";
                 include('userprofile.php');
             } else {

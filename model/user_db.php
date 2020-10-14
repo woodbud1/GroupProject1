@@ -98,14 +98,13 @@ class UserDB {
     }
 
 
-    public static function uploadImage($user_id, $image) {
+    public static function uploadImage($username, $image) {
         $db = Database::getDB();
-
-        $query = 'UPDATE users SET image = :image
-        WHERE userID = :user_id';
+        $query = 'UPDATE user SET image = :image
+        WHERE UserName = :username';
         $statement = $db->prepare($query);
         $statement->bindValue(':image', $image);
-        $statement->bindValue(':user_id', $user_id);
+        $statement->bindValue(':username', $username);
         $statement->execute();
         $statement->closeCursor();
     }
@@ -123,13 +122,13 @@ class UserDB {
         return $userID;
     }
 
-    public static function fetchImage($user_id) {
+    public static function fetchImage($username) {
         $db = Database::getDB();
 
-        $query = 'SELECT * FROM user
-                  WHERE ID = :user_id';
+        $query = 'SELECT image FROM user
+                  WHERE UserName = :username';
         $statement = $db->prepare($query);
-        $statement->bindValue(':user_id', $user_id);
+        $statement->bindValue(':username', $username);
         $statement->execute();
         $image = $statement->fetch();
         $statement->closeCursor();
