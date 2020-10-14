@@ -5,12 +5,7 @@ require('../model/question_db.php');
 //session_start();
 //
 //set default values
-$number1 = rand(0, 9);
-$number2 = rand(0, 9);
-$message = 'Enter some numbers and click on the Submit button.';
-$operand = filter_input(INPUT_POST, 'operator');
-echo htmlspecialchars($operand);
-$answer = 0;
+
 
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
@@ -58,6 +53,7 @@ switch ($action) {
             }
 
             $question = new Question($number1, $number2, $answer, $operand);
+            questions_db::addQuestion($question);
         } else {
             $message = 'You must enter all numbers as integers.';
             break;

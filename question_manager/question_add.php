@@ -1,3 +1,10 @@
+<?php
+$number1 = rand(0, 9);
+$number2 = rand(0, 9);
+$message = 'Enter some numbers and click on the Submit button.';
+$operand = filter_input(INPUT_POST, 'operator');
+echo htmlspecialchars($operand);
+$answer = 0; ?>
 <!DOCTYPE html>
 <html>
     <head>

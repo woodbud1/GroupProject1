@@ -22,7 +22,24 @@ class questions_db {
     }
 
     public static function addQuestion($question) {
-        
+        $db = Database::getDB();
+
+        $number1 = $question->getNumber1();
+        $number2 = $question->getNumber2();
+        $answer = $question->getAnswer();
+        $operand = $question->getOperand();
+
+        $query = 'INSERT INTO questions
+                     (number1, number2, answer, operand)
+                  VALUES
+                     (:number1, :number2, :answer, :operand)';
+        $statement = $db->prepare($query);
+        $statement->bindValue(':number1', $number1);
+        $statement->bindValue(':number2', $number2);
+        $statement->bindValue(':answer', $answer);
+        $statement->bindValue(':operand', $operand);
+        $statement->execute();
+        $statement->closeCursor();
     }
 
     public static function editQuestion($question) {
