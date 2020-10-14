@@ -77,17 +77,17 @@ switch ($action) {
         // Test for duplicate username
         $userResult = UserDB::duplicateUser($userTest);
         if($userResult > 0){
-
-        } else{
             // Have a test string to increment against
             $userDupTest = $userTest;
             while ($userResult > 0) {
                 // Go up a single digit every time there is a duplicate number
                 $dupCounter++;
                 $userDupTest = $userTest.$dupCounter;
-                $userResult = user_db::duplicateUser($userDupTest);
+                $userResult = UserDB::duplicateUser($userDupTest);
             } 
             $userTest = $userDupTest;
+        } else{
+            
         }
 
         if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] != "!") {
@@ -142,8 +142,8 @@ switch ($action) {
             // Create the Session to validate the user is logged in and track name
             $_SESSION["user_name"] = $user_name;
             // Hash it for the server and pass it back to the password
-            $hash = password_hash($password, PASSWORD_BCRYPT);
-            $password = $hash;
+            // $hash = password_hash($password, PASSWORD_BCRYPT);
+            // $password = $hash;
             $i = new User($first_name, $last_name, $user_name, $password);
             UserDB::addUser($i);
             include('confirmation.php');
@@ -167,13 +167,18 @@ switch ($action) {
             trim($hash);
         }
 
-
-        if (password_verify($password_entry, $hash)) {
+        if ($password_entry === $hash) {
             $isValid = true;
         } else {
             $isValid = false;
             $loginerror_message = "Login Failed. Check username or password.";
         }
+        /* if (password_verify($password_entry, $hash)) {
+            $isValid = true;
+        } else {
+            $isValid = false;
+            $loginerror_message = "Login Failed. Check username or password.";
+        } */
 
         if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] !== "!") {
             $isValid = false;
@@ -254,7 +259,7 @@ switch ($action) {
             // Hash values are encrypted to 59/60 bytes so changing to BINARY(60) for password is easier. 
             // $hash = password_hash($password, PASSWORD_BCRYPT);
             $user = $_SESSION["user_name"];
-            UserDB::changePassword($hash, $user);
+            UserDB::changePassword($password, $user);
             $pass_message = "Password successfully updated";
         }
 

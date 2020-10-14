@@ -1,7 +1,6 @@
 <?php
 $the_title = "Confirmation";
 $pathcor = "../";
-$showloginbar = 1;
 require_once '../view/header.php';
 ?>
     <body>
