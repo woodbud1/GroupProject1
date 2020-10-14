@@ -16,13 +16,13 @@
                        value="<?php echo htmlspecialchars($number1); ?>">
                 <br><br>
                 <label>Add (+)</label>
-                <input type="radio" name="operator" value="add"><br>
+                <input type="radio" name="operator" value="add" <?php echo (isset($_POST['operator']) && $_POST['operator']=='add')? ' checked' : '';?>><br>
                 <label>Subtract (-)</label>
-                <input type="radio" name="operator" value="subtract"><br>
+                <input type="radio" name="operator" value="subtract" <?php echo (isset($_POST['operator']) && $_POST['operator']=='subtract')? ' checked' : '';?>><br>
                 <label>Multiply (X)</label>
-                <input type="radio" name="operator" value="multiply"><br>
+                <input type="radio" name="operator" value="multiply" <?php echo (isset($_POST['operator']) && $_POST['operator']=='multiply')? ' checked' : '';?>><br>
                 <label>Divide (/)</label>
-                <input type="radio" name="operator" value="divide"><br>
+                <input type="radio" name="operator" value="divide" <?php echo (isset($_POST['operator']) && $_POST['operator'] === 'divide')? ' checked' : '';?>><br>
                 <br>
                 <label>Number 2:</label>
                 <input type="text" name="number2"
