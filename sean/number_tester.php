@@ -16,7 +16,7 @@
                        value="<?php echo htmlspecialchars($number1); ?>">
                 <br><br>
                 <label>Add (+)</label>
-                <input type="radio" name="operator" value="add" checked="checked"><br>
+                <input type="radio" name="operator" value="add"><br>
                 <label>Subtract (-)</label>
                 <input type="radio" name="operator" value="subtract"><br>
                 <label>Multiply (X)</label>
