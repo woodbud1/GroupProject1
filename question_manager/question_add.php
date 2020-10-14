@@ -1,30 +1,49 @@
-
 <?php
-$the_title = "MathWiz | Database Error";
-$pathcor = "../";
-require_once '../view/header.php';
-?>
-<main>
-    <div class="question_add">
-        <h1>Add Question</h1>
+$number1 = rand(0, 9);
+$number2 = rand(0, 9);
+$message = 'Enter some numbers and click on the Submit button.';
+$operand = filter_input(INPUT_POST, 'operator');
+echo htmlspecialchars($operand);
+$answer = 0; ?>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Number Tester</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
+    </head>
 
-        <form action="index.php" method="post" id="add_question_form">
-            <input type="hidden" name="action" value="add_question" />
+    <body>
+        <main>
+            <h1>Add Question</h1>
+            <form action="." method="post">
+                <input type="hidden" name="action" value="process_data">
 
-            <label>Question:</label>
-            <p>
-                <input type="number" name="addendOne">
-                <span class="question_add_char">+</span>
-                <input type="number" name="addendOne">
-                <span class="question_add_char">=</span>
-                <input type="number" name="answer">
-            </p>
+                <label>Number 1:</label>
+                <input type="text" name="number1"
+                       value="<?php echo htmlspecialchars($number1); ?>">
+                <br><br>
+                <label>Add (+)</label>
+                <input type="radio" name="operator" value="add"><br>
+                <label>Subtract (-)</label>
+                <input type="radio" name="operator" value="subtract"><br>
+                <label>Multiply (X)</label>
+                <input type="radio" name="operator" value="multiply"><br>
+                <label>Divide (/)</label>
+                <input type="radio" name="operator" value="divide"><br>
+                <br>
+                <label>Number 2:</label>
+                <input type="text" name="number2"
+                       value="<?php echo htmlspecialchars($number2); ?>">
+                <br>
+                <label>&nbsp;</label>
+                <input type="submit" value="Submit">
+                <br>
 
-            <label>&nbsp;</label>
-            <input type="submit" value="Add Question">
-            <br>
-        </form>
-        <p><a href="index.php?action=list_questions">View Question List</a></p>
-    </div>
-</main>
-<?php include '../view/footer.php'; ?>
+            </form>
+
+            <h2>Message:</h2>
+            <p><?php echo nl2br(htmlspecialchars($message), FALSE); ?></p>
+
+        </main>
+    </body>
+</html>
