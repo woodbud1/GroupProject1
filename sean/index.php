@@ -14,7 +14,7 @@ switch ($action) {
     case 'process_data':
         $number1 = filter_input(INPUT_POST, 'number1');
         $number2 = filter_input(INPUT_POST, 'number2');
-        
+
         if (ctype_digit(ltrim((string) $number1, '-'))) {
 
             if ($operand == "add") {
@@ -33,11 +33,17 @@ switch ($action) {
                 if ($number2 == 0) {
                     $message = "Cannot divide by zero.";
                     break;
+                }
+                if ($number1 % $number2 > 0) {
+                    $message = "Result is not an integer.";
+                    break;
                 } else {
                     $answer = $number1 / $number2;
                     $message = "The answer is: " . $answer;
+                    break;
                 }
             }
+
             break;
         } else {
             $message = 'You must enter all numbers as integers.';
