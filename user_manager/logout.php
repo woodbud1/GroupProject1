@@ -8,7 +8,7 @@ include '../view/header.php'; ?>
                     <center><h1>You have been Logged Out</h1></center>
                 </div>
         </div>   
-     <form action=".." method="post" >
+     <form action="." method="post" >
         <p>
             <input type="hidden" name="action" value="login" >
             <input class="button" type="submit" value="Back to Login" ></p>
