@@ -40,9 +40,10 @@
                     if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] !== "!") {
                         echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=home_index">Home</a></li>';
                         echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=profile">Profile</a></li>';
-                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">Test</a></li>';
-                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">Drill</a></li>';
-                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=">About</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=test">Test</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=drill">Drill</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=flashcard">Flashcards</a></li>';
+                        echo'<a href="'. htmlspecialchars($pathcor, ENT_QUOTES | ENT_HTML5, "UTF-8") . 'user_manager?action=about_index">About</a></li>';
                         echo'<a href="?action=logoff">Logoff</a></li>';
 
                     }else{
