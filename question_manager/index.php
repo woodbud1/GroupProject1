@@ -3,6 +3,15 @@ require('../model/database.php');
 require('../model/question.php');
 require('../model/question_db.php');
 //session_start();
+//
+//set default values
+$number1 = rand(0, 9);
+$number2 = rand(0, 9);
+$message = 'Enter some numbers and click on the Submit button.';
+$operand = filter_input(INPUT_POST, 'operator');
+echo htmlspecialchars($operand);
+$answer = 0;
+
 $action = filter_input(INPUT_POST, 'action');
 if ($action === NULL) {
     $action = filter_input(INPUT_GET, 'action');
@@ -19,10 +28,40 @@ switch ($action) {
         include('add_question');
         break;
     case 'add_question':
-        $addendOne = filter_input(INPUT_POST, 'addendOne');
-        $addendTwo = filter_input(INPUT_POST, 'addendTwo');
-        $sum = filter_input(INPUT_POST, 'sum');
-        break;
+        $number1 = filter_input(INPUT_POST, 'number1');
+        $number2 = filter_input(INPUT_POST, 'number2');
+        $answer = filter_input(INPUT_POST, 'answer');
+        $operand = filter_input(INPUT_POST, 'operand');
+
+        if (ctype_digit(ltrim((string) $number1, '-'))) {
+
+            if ($operand == "add") {
+                $answer = $number1 + $number2;
+                $message = "The answer is: " . $answer;
+            }
+            if ($operand == "subtract") {
+                $answer = $number1 - $number2;
+                $message = "The answer is: " . $answer;
+            }
+            if ($operand == "multiply") {
+                $answer = $number1 * $number2;
+                $message = "The answer is: " . $answer;
+            }
+            if ($operand == "divide") {
+                if ($number2 == 0) {
+                    $message = "Cannot divide by zero.";
+                    break;
+                } else {
+                    $answer = $number1 / $number2;
+                    $message = "The answer is: " . $answer;
+                }
+            }
+
+            $question = new Question($number1, $number2, $answer, $operand);
+        } else {
+            $message = 'You must enter all numbers as integers.';
+            break;
+        }    
     case 'delete_question':
         break;
     case 'show_edit_form':

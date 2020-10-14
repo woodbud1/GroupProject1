@@ -5,10 +5,11 @@ class Question {
     
     private $id, $addendOne, $addendTwo, $answer;
 
-    public function __construct($addendOne, $addendTwo, $answer) {
-        $this->addendOne = $addendOne;
-        $this->addendTwo = $addendTwo;
+    public function __construct($number1, $number2, $answer, $operand) {
+        $this->number1 = $number1;
+        $this->number2 = $number2;
         $this->answer = $answer;
+        $this->operand = $operand; 
     }
     
     public function getID() {
@@ -18,18 +19,18 @@ class Question {
         $this->id = $value;
     }
 
-    public function getAddendOne() {
-        return $this->addendOne;
+    public function getNumber1() {
+        return $this->number1;
     }
-    public function setAddendOne($value) {
-        $this->addendOne = $value;
+    public function setNumber1($value) {
+        $this->number1 = $value;
     }
     
-    public function getAddendTwo() {
-        return $this->addendTwo;
+    public function getNumber2() {
+        return $this->number2;
     }
-    public function setAddendTwo($value) {
-        $this->addendTwo = $value;
+    public function setNumber2($value) {
+        $this->number2 = $value;
     }
 
     public function getAnswer() {
@@ -37,5 +38,11 @@ class Question {
     }
     public function setAnswer($value) {
         $this->answer = $value;
+    }
+    public function getOperand() {
+        return $this->operand;
+    }
+    public function setOperand($value) {
+        $this->operand = $value;
     }
 }
