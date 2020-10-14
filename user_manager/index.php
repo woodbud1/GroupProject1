@@ -543,6 +543,9 @@ case "viewdelete":
         }
         include('../drill/index.php');
     break;
+    case 'flashcard':
+        include('../flashcards/index.php');
+    break;
     default:
         $error = "Definitely, not suppose to be redirected here.";
         include('../errors/error.php');
