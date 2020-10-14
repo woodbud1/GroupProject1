@@ -77,17 +77,17 @@ switch ($action) {
         // Test for duplicate username
         $userResult = UserDB::duplicateUser($userTest);
         if($userResult > 0){
-
-        } else{
             // Have a test string to increment against
             $userDupTest = $userTest;
             while ($userResult > 0) {
                 // Go up a single digit every time there is a duplicate number
-                $dupCounter = $dupCounter + 1;
+                $dupCounter++;
                 $userDupTest = $userTest.$dupCounter;
-                $userResult = user_db::duplicateUser($userDupTest);
+                $userResult = UserDB::duplicateUser($userDupTest);
             } 
             $userTest = $userDupTest;
+        } else{
+            
         }
 
         if (isset($_SESSION["user_name"]) && $_SESSION["user_name"] != "!") {
