@@ -226,26 +226,6 @@ switch ($action) {
         $user_image = UserDB::fetchImage($userID[0]);
         include('./user_manager/userprofile.php');
         break;
-    // case 'changeEmail':
-    //     $emailTest = filter_input(INPUT_POST, "newemail");
-    //     $emailResult = UserDB::duplicateEmail($emailTest);
-    //     if ($emailResult > 0) {
-    //         $email_message = "E-mail in use.";
-    //     } else {
-    //         $newEmail = $emailTest;
-    //         $user = $_SESSION["user_name"];
-    //         $email_message = "E-mail successfully updated.";
-    //         UserDB::changeEmail($newEmail, $user);
-    //     }
-
-    //     $pass_message = '';
-    //     $user_message = '';
-    //     $user_display = $_SESSION["user_name"];
-    //     $userID = UserDB::fetchUserID($user_display);
-    //     $user_image = UserDB::fetchImage($userID[0]);
-
-    //     include('userprofile.php');
-    //     break;
     case 'uploadImage':
         $user_display = $_SESSION["user_name"];
         $error;
@@ -291,158 +271,6 @@ switch ($action) {
             }
         }
         break;
-        /*
-    case 'list_users':
-        $a = '<p class="alert alert-success" role="alert" type="hidden" >';
-        $b = '<p class="alert alert-danger" role="alert" type="hidden" >';
-        $c = ' </p>';
-        $errMessage = filter_input(INPUT_GET, "errMessage");
-        $sucMessage = filter_input(INPUT_GET, "sucMessage");
-        if (isset($view_user)) :
-            $view_user = $_SESSION["view_user"];
-        else :
-            $view_user = '';
-        endif;
-        if (isset($_SESSION["view_user"])) :
-            $view_user = $_SESSION["view_user"];
-            $profile = $view_user;
-        endif;
-        if (isset(($_SESSION["user_name"]))) :
-            $commenterProfile = $_SESSION["user_name"];
-            $_SESSION["thier_username"] = $_SESSION["user_name"];
-        else :
-            $view_user = '';
-        endif;
-        $users = UserDB::getUsers();
-        include('users_directory.php');
-        break;
-    case 'view_profile':
-        $_SESSION["view_user"] = filter_input(INPUT_POST, "profile");
-
-        if (isset($_SESSION["view_user"])) :
-            $view_user = $_SESSION["view_user"];
-            $profile = $view_user;
-        endif;
-        if (isset(($_SESSION["user_name"]))) :
-            $commenterProfile = $_SESSION["user_name"];
-            $entry = $commenterProfile;
-            $_SESSION["thier_username"] = $_SESSION["user_name"];
-        else :
-            $view_user = '';
-        endif;
-        $view_user = $_SESSION["view_user"];
-        //$commenterProfile = $_SESSION["user_name"];
-        $error_message = '';
-
-        include('public_profile.php');
-        break;
-
-        
-    case 'post_comment':
-        if (isset($user_name) === false) :
-            $user_name = '';
-        endif;
-        $view_user = $_SESSION["view_user"];
-
-        $aerror = "Something went wrong adding the comment to the database...";
-        $success = "Success comment added to " . $view_user . "'s profile.";
-
-        $commentToAdd = filter_input(INPUT_POST, "commentToAdd", FILTER_VALIDATE_INT);
-        $commentid = null;
-        $profile = $view_user;
-        if (isset($_SESSION["user_name"])) :
-            $commenterProfile = $_SESSION["user_name"];
-        endif;
-        if (isset($commenterProfile) === false) :
-            $commenterProfile = null;
-        endif;
-        $acomment = filter_input(INPUT_POST, 'acomment');
-
-        $atimestamp = null;
-        // Create the comment object
-        $commentToAdd = new Comment($commentid, $profile, $commenterProfile, $acomment, $atimestamp);
-        // Add the comment to the database
-        if ($commentToAdd === false || $commentToAdd === null) {
-            $error_message = "Something went wrong adding the comment to the database... <br> comment cannot be null";
-            include('public_profile.php');
-        } elseif ($profile === false || $profile === null || $profile === '' || $view_user === false || $view_user === null || $view_user === '' || $user_name === null || $user_name === false || $commenterProfile === null) {
-            $error_message = "You need to login to preform this action...";
-            include('public_profile.php');
-        } elseif ($acomment === '') {
-            $error_message = "You cannot leave a comment with nothing as a message...";
-            include('public_profile.php');
-        } elseif (strlen($acomment) > 2500) {
-            $error_message = "Your comment is greater than 2,500 characters.";
-            $acomment = filter_input(INPUT_POST, 'acomment');
-            include('public_profile.php');
-        } elseif ($profile === $commenterProfile) {
-            $error_message = "You cannot leave a comment on your own profile...";
-            include('public_profile.php');
-        } else {
-            // Add the comment to the database
-            CommentDB::addComment($commentToAdd);
-            $success = "Success comment added to " . $view_user . "'s profile.";
-            header("Location: index.php?action=list_users&sucMessage");
-            die();
-            break;
-        }
-        break;
-
-case "viewdelete":
-    $profile = $_SESSION["user_name"];
-
-    $a = '<p class="alert alert-success" role="alert" type="hidden" >';
-    $b = '<p class="alert alert-danger" role="alert" type="hidden" >';
-    $c = ' </p>';
-    $errMessage = filter_input(INPUT_GET, "errMessage");
-    $sucMessage = filter_input(INPUT_GET, "sucMessage");
-    $aerror = "Bad ID, cannot be deleted";
-    $success = "Success comment deleted";
-    $comments = CommentDB::getbyprofile($profile);
-    include('viewdelete.php');
-    die();
-    break;
-
-    case "delete":
-        $idToDelete = filter_input(INPUT_POST, "idToDelete", FILTER_VALIDATE_INT);
-
-        if ($idToDelete === false || $idToDelete === null) {
-            header("Location: index.php?action=viewdelete&errMessage");
-            die();
-        }
-        Commentdb::deleteComment($idToDelete);
-        header("Location: index.php?action=viewdelete&sucMessage");
-        die();
-        break;
-
-
-        case "viewupdatecomment":
-            $profile = $_SESSION["user_name"];
-        
-            $a = '<p class="alert alert-success" role="alert" type="hidden" >';
-            $b = '<p class="alert alert-danger" role="alert" type="hidden" >';
-            $c = ' </p>';
-            $errMessage = filter_input(INPUT_GET, "errMessage");
-            $sucMessage = filter_input(INPUT_GET, "sucMessage");
-            $aerror = "Something went wrong, id could not be updated";
-            $success = "Success comment updated";
-            $comments = CommentDB::getbyprofile($profile);
-            include('updateComment.php');
-            die();
-            break;
-
-        case 'updateComment' :
-            $idToUpdate = filter_input(INPUT_POST, "idToUpdate", FILTER_VALIDATE_INT);
-            $newComment = filter_input(INPUT_POST, "acomment", FILTER_VALIDATE_INT);
-            if ($idToUpdate === false || $idToUpdate === null || $idToUpdate === '' || $newComment === '' || $newComment === null || $newComment === false) {
-                header("Location: index.php?action=viewupdatecomment&errMessage");
-                die();
-            }
-            CommentDB::updateComment($idToUpdate, $newComment);
-            header("Location: index.php?action=viewupdatecomment&sucMessage");
-            die();
-        break;
-*/
     case 'home_index':        
         include('main_page.php');
         break;
@@ -494,7 +322,10 @@ case "viewdelete":
         include('./drill/index.php');
     break;
     case 'flashcard':
-        include('./flashcards/index.php');
+        // I don't have any data to work with so I'm going to use leave this here for now...
+        // $questions = questions_db::getQuestions();
+        // include('./flashcards/index.php');
+        break;
     break;
     default:
         $error = "Definitely, not suppose to be redirected here.";
