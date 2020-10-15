@@ -1,7 +1,7 @@
 <?php
 $the_title = "MathWiz | Registration";
-$pathcor = "./";
-require_once './view/header.php';
+$pathcor = "../";
+require_once '../view/header.php';
 if (!isset($error_message)) {
     $error_message = '';
 }

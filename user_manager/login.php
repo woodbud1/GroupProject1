@@ -1,8 +1,8 @@
 <?php
 
 $the_title = "MathWiz | Login";
-$pathcor = "./";
-require_once './view/header.php';
+$pathcor = "../";
+require_once '../view/header.php';
 ?>
 
 
