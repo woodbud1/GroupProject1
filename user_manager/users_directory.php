@@ -2,7 +2,7 @@
 <?php
 $the_title = "MathWiz | User Directory";
 $pathcor = "./";
-require_once './view/header.php';
+require_once '../view/header.php';
 if (isset($_SESSION["view_user"])) :
     $view_user = $_SESSION["view_user"];
     $profile = $view_user;
@@ -37,4 +37,4 @@ endif;
         </table>
     </div>
 </div>
-<?php require_once './view/footer.php'; ?>
+<?php require_once '../view/footer.php'; ?>
